@@ -16,7 +16,7 @@ def browser_context_with_auth():
             context = browser.new_context(storage_state=AUTH_STATE_FILE)
         else:
             context = browser.new_context()
-            page = context.new_page()
+            _ = context.new_page()
             # Replace with real login steps:
             # page.goto("https://your-app.com/login")
             # page.fill("#email", "user@example.com")
