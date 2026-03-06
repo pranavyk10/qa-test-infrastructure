@@ -14,7 +14,6 @@ class Account(Base):
     owner = Column(String(50))
     balance = Column(Numeric(10, 2))
 
-# ✅ Fix: module-scoped event loop to match module-scoped engine fixture
 @pytest.fixture(scope="module")
 def event_loop():
     loop = asyncio.new_event_loop()

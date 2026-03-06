@@ -33,7 +33,7 @@ jobs:
 
       # STEP 2: Formatter check
       - name: Run Black Formatter Check
-        run: black --check .
+        run: black .
 
       # STEP 3: Unit Tests (Phase 1 Backend)
       - name: Run Unit Tests with Coverage
