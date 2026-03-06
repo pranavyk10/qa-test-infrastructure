@@ -49,10 +49,26 @@ else:
 
 # --- Distribution Drift Visualization ---
 st.subheader("Input Feature Distribution (Age)")
+
+# Convert interval bins to readable strings — fixes Vega-Lite serialization error
 train_ages = pd.DataFrame({"Age": X_train[:, 0], "Dataset": "Training"})
 test_ages = pd.DataFrame({"Age": X_test[:, 0], "Dataset": "Production"})
-combined = pd.concat([train_ages, test_ages])
-st.bar_chart(combined.groupby(["Dataset", pd.cut(combined["Age"], bins=10)]).size().unstack(0))
+combined = pd.concat([train_ages, test_ages], ignore_index=True)
+
+# Cut into bins and convert Interval → string label
+combined["Age Bin"] = pd.cut(combined["Age"], bins=10).astype(str)
+
+chart_data = (
+    combined.groupby(["Age Bin", "Dataset"])
+    .size()
+    .reset_index(name="Count")
+    .pivot(index="Age Bin", columns="Dataset", values="Count")
+    .fillna(0)
+    .sort_index()
+)
+
+st.bar_chart(chart_data)
+
 
 # --- Adversarial / Prompt Injection Test Section ---
 st.subheader("🛡️ Adversarial & Edge Case Tests")
