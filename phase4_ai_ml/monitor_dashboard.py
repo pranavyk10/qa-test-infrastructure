@@ -9,6 +9,9 @@ from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, classification_report
 from sklearn.model_selection import train_test_split
+import re
+from dataclasses import dataclass, field
+from typing import List, Tuple
 
 F1_THRESHOLD = 0.80
 
@@ -76,9 +79,7 @@ st.caption("Multi-layer detection: pattern matching → encoding detection → s
 # ============================================================
 # DETECTION ENGINE
 # ============================================================
-import re
-from dataclasses import dataclass, field
-from typing import List, Tuple
+
 
 @dataclass
 class DetectionResult:
