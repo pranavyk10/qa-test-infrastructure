@@ -1,0 +1,60 @@
+name: QA Test Infrastructure CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # STEP 1: Linter
+      - name: Run Ruff Linter
+        run: ruff check . --fix
+
+      # STEP 2: Formatter check
+      - name: Run Black Formatter Check
+        run: black --check .
+
+      # STEP 3: Unit Tests (Phase 1 Backend)
+      - name: Run Unit Tests with Coverage
+        run: |
+          pytest phase1_backend/tests/ \
+            --cov=phase1_backend/app \
+            --cov-report=xml \
+            --cov-fail-under=90 \
+            -v
+
+      # STEP 4: Integration Tests
+      - name: Run Integration Tests
+        run: |
+          pytest phase2_data/ -v -m "not nosql"
+
+      # STEP 5: Security Scan
+      - name: Run Bandit Security Scan
+        run: |
+          bandit -r phase1_backend/app phase2_data -ll
+
+      - name: Upload Coverage Report
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml

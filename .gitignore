@@ -1,0 +1,141 @@
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============================================================
+# Virtual Environments
+# ============================================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# ============================================================
+# Pytest & Coverage
+# ============================================================
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.coveragerc
+nosetests.xml
+test-results/
+test-reports/
+
+# ============================================================
+# Phase 1 — SQLite test databases
+# ============================================================
+*.db
+*.db-shm
+*.db-wal
+test.db
+
+# ============================================================
+# Phase 3 — Playwright
+# ============================================================
+phase3_frontend/auth_state.json
+playwright-report/
+test-results/
+trace/
+*.zip
+
+# ============================================================
+# Phase 4 — Streamlit / ML artifacts
+# ============================================================
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+__pycache__/
+.streamlit/secrets.toml
+
+# ============================================================
+# Phase 5 — CI/CD & GitHub Actions
+# ============================================================
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+bandit-report.json
+
+# ============================================================
+# Alembic
+# ============================================================
+alembic/versions/__pycache__/
+
+# ============================================================
+# IDEs & Editors
+# ============================================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# Environment Variables & Secrets
+# ============================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+secrets.yaml
+
+# ============================================================
+# Logs
+# ============================================================
+*.log
+logs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ============================================================
+# OS
+# ============================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini

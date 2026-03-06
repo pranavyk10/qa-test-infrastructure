@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qa-test-infrastructure"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["phase1_backend*", "phase2_data*", "phase3_frontend*", "phase4_ai_ml*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "integration: marks tests as integration tests",
+    "performance: marks tests as performance tests",
+]
+addopts = "--cov=phase1_backend/app --cov-report=term-missing --cov-fail-under=90"
+
+[tool.ruff]
+line-length = 88
+
+[tool.black]
+line-length = 88
